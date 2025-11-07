@@ -35,7 +35,3 @@ This analysis will combine exploratory data analysis (EDA), classification, and 
 Cleaned combined dataset:  
 `data/clean_streaming_metadata.csv`
 
----
-
-## Folder Layout
-
