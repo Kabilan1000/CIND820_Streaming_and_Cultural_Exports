@@ -35,3 +35,9 @@ This analysis will combine exploratory data analysis (EDA), classification, and 
 Cleaned combined dataset:  
 `data/clean_streaming_metadata.csv`
 
+
+## Data (not tracked in Git)
+Place the following datasets locally before running notebooks:
+- IMDb dumps: `title.basics.tsv.gz`, `title.akas.tsv.gz`, `title.ratings.tsv.gz`
+- Path: `notebooks/data/imdb/`
+Sources: IMDb datasets / Kaggle links (see project report).
