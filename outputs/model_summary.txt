@@ -1,0 +1,14 @@
+
+Model Summary – Logistic Regression Baseline
+--------------------------------------------
+Accuracy:  0.729  (72.9%)
+Precision: 0.578
+Recall:    0.439
+F1-Score:  0.499
+
+Null Hypothesis: Metadata features do not predict popularity.
+Alternative: Metadata features provide predictive value.
+
+Result: With accuracy above the 0.5 random baseline and non-zero feature weights,
+we reject the Null in favor of the Alternate. Metadata features (platform, type, release_year, genres)
+carry measurable predictive signal for title popularity.
