@@ -17,10 +17,10 @@ This analysis will combine exploratory data analysis (EDA), classification, and 
 
 ## Research Questions
 
-1. How do Netflix, Disney+, and Amazon Prime differ in representing international titles by **genre**, **release period**, and **inferred language or regional indicators**?  
-2. Can we predict whether a title will be **popular** based on metadata such as **platform**, **genre**, **release year**, and **type**, without relying on incomplete country information?  
-3. What **clusters or groupings** of titles emerge when grouped by metadata features such as genre, year, and platform?  
-4. Which platform demonstrates the strongest **cultural diversity or cross-regional representation** based on these findings?
+1. How do Netflix, Disney+, and Amazon Prime differ in representing titles by **genre**, **release period**, and overall **catalogue composition**?  
+2. To what extent can metadata, specifically **platform**, **genre**, **release year**, and **type**, help explain or predict a title’s **popularity** (as measured by IMDb ratings)?  
+3. Are there clear **differences between platforms** in how metadata factors relate to popularity outcomes?  
+4. How can the presence of **international or globally oriented genres** (e.g., “International Movies”) be used to approximate **cultural diversity** across streaming platforms?
 
 ---
 
@@ -32,16 +32,18 @@ This analysis will combine exploratory data analysis (EDA), classification, and 
 | Amazon Prime | [Kaggle – Amazon Prime Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/amazon-prime-movies-and-tv-shows) | Public Domain |
 | Disney+ | [Kaggle – Disney+ Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/disney-movies-and-tv-shows) | Public Domain |
 
-Additional metadata was sourced from official **IMDb public datasets** for improved coverage of ratings and release details:  
+Additional metadata was sourced and merged from publicly available **IMDb datasets** to supplement missing ratings and production details:  
 - `title.basics.tsv.gz`  
 - `title.akas.tsv.gz`  
-- `title.ratings.tsv.gz`
+- `title.ratings.tsv.gz`  
 
-These files were obtained from IMDb’s [official dataset portal](https://datasets.imdbws.com/) and corresponding [Kaggle mirrors](https://www.kaggle.com/datasets/ashirwadsangwan/imdb-dataset).  
-   **OMDb API** was tested but not used due to API rate limits and scalability constraints for large datasets.
-Additional metadata was merged from publicly available **IMDb datasets** to supplement missing ratings and production details.  
-To reproduce the enriched dataset, download the  IMDb files place them inside a new folder:
+These files can be downloaded from [IMDb’s official dataset portal](https://datasets.imdbws.com/) or the [Kaggle IMDb mirror](https://www.kaggle.com/datasets/ashirwadsangwan/imdb-dataset).  
+The **OMDb API** was tested but not used due to rate limits that prevent large-scale retrieval.
+
+To reproduce the enriched dataset, download these files and place them in:  
 `/data/imdb/`
+
+They are not stored in this repository due to size constraints, but the cleaning notebook (`Cleaning.ipynb`) will automatically detect and merge them if present.
 
 These files are not included in this repository due to their large size but are freely available from IMDb. The cleaning notebook (`Cleaning.ipynb`) will automatically detect and merge them if present in that folder.
 
@@ -103,7 +105,7 @@ All figures and results shown in `Puvaneswaran_Kabilan_Initial_Results.pdf` were
    - `title.basics.tsv.gz`  
    - `title.ratings.tsv.gz`  
    - `title.akas.tsv.gz`
-3. Place download files within `notebooks/data/` and `notebooks/data/imdb/` respectively  
+3. Place all downloaded files in the `/data/` and `/data/imdb/` directories as shown above 
 4. Run `Cleaning.ipynb`, then `EDA.ipynb`.
 
 If the IMDb files are not found, the enrichment step will be skipped automatically and the dataset will still load with the base Kaggle metadata.
@@ -111,6 +113,7 @@ If the IMDb files are not found, the enrichment step will be skipped automatical
 Deliverables:
 - `Puvaneswaran_Kabilan_InitialResults.pdf`  
 - `data/clean_streaming_metadata.csv`  
-- `/figures/` directory (EDA outputs)  
+- `/figures/` directory (Figures output)
+- `/outputs/` directory (model statistics output)  
 - `Cleaning.ipynb` and `EDA.ipynb` notebooks  
 -  Google Meet walkthrough (link to be added)
