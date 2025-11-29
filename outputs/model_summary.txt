@@ -1,14 +1,41 @@
 
-Model Summary – Logistic Regression Baseline
---------------------------------------------
-Accuracy:  0.729  (72.9%)
-Precision: 0.578
-Recall:    0.439
-F1-Score:  0.499
+Model summary – popularity classification
+-----------------------------------------
+Label:
+  popular = 1 if imdb_rating >= 7.0, else 0.
 
-Null Hypothesis: Metadata features do not predict popularity.
-Alternative: Metadata features provide predictive value.
+Features:
+  platform, type, release_year, top-20 genres
+  (no IMDb-based features, country excluded from modeling).
 
-Result: With accuracy above the 0.5 random baseline and non-zero feature weights,
-we reject the Null in favor of the Alternate. Metadata features (platform, type, release_year, genres)
-carry measurable predictive signal for title popularity.
+Majority baseline (most frequent class):
+  Accuracy: 0.576 (57.6%)
+  F1-score: 0.000
+
+Logistic regression (single 70/30 split):
+  Accuracy: 0.562 (56.2%)
+  Precision: 0.483
+  Recall: 0.467
+  F1-score: 0.475
+
+Random Forest (single 70/30 split):
+  Accuracy: 0.581 (58.1%)
+  Precision: 0.506
+  Recall: 0.467
+  F1-score: 0.486
+
+Logistic regression (5-fold stratified CV):
+  Mean test accuracy: 0.607 ± 0.029
+  Mean test F1-score: 0.511 ± 0.026
+
+Random Forest (5-fold stratified CV):
+  Mean test accuracy: 0.589 ± 0.028
+  Mean test F1-score: 0.496 ± 0.020
+
+Interpretation:
+  Relative to the majority baseline, both models provide a modest but real uplift in
+  accuracy and F1. Logistic regression and random forest show similar stability under
+  cross-validation, with random forest offering higher recall and F1 on the "popular"
+  class. These remain associative patterns derived from metadata, not causal effects,
+  and are used to summarize which platforms, years, and genres are most linked to
+  higher predicted popularity.
