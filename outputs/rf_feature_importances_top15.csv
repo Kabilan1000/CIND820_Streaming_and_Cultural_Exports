@@ -1,5 +1,7 @@
 ,importance
-release_year,0.8694690574693773
-type_TV Show,0.06681096156100741
-type_Movie,0.06371998096961534
-platform_Disney+,0.0
+release_year,0.4275088589313546
+type_TV Show,0.266165241172328
+type_Movie,0.22279045780223053
+platform_Amazon Prime,0.044033042039253595
+platform_Netflix,0.02533908497551965
+platform_Disney+,0.01416331507931354
