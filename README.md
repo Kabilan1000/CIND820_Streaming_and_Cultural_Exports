@@ -9,9 +9,10 @@
 ## Overview
 
 This project examines how major streaming platforms, Netflix, Disney+, and Amazon Prime, act as cultural intermediaries by curating and promoting international media.  
-The goal is to compare how each platform represents content, and test whether the metadata can predict popularity whiel also identifying cross-platform cultural groupings.
+The goal is to compare how each platform represents content, and test whether the metadata can predict popularity while also identifying cross-platform cultural groupings.
 
-This analysis will combine exploratory data analysis (EDA), classification, and clustering methods to study representation patterns and cultural diversity across the three streaming services.
+This analysis combines exploratory data analysis (EDA), classification, and clustering methods to study representation patterns and cultural diversity across the three streaming services.  
+A caching mechanism is used to speed up repeat runs of the IMDb enrichment step.
 
 ---
 
@@ -20,7 +21,7 @@ This analysis will combine exploratory data analysis (EDA), classification, and 
 1. How do Netflix, Disney+, and Amazon Prime differ in representing titles by **genre**, **release period**, and overall **catalogue composition**?  
 2. To what extent can metadata, specifically **platform**, **genre**, **release year**, and **type**, help explain or predict a title’s **popularity** (as measured by IMDb ratings)?  
 3. Are there clear **differences between platforms** in how metadata factors relate to popularity outcomes?  
-4. How can the presence of **international or globally oriented genres** (e.g., “International Movies”) be used to approximate **cultural diversity** across streaming platforms?
+4. How can the presence of **international or globally oriented genres** (e.g., “International Movies”) be used to approximate **cultural diversity**, given the unreliability of country metadata?
 
 ---
 
@@ -43,12 +44,14 @@ The **OMDb API** was tested but not used due to rate limits that prevent large-s
 To reproduce the enriched dataset, download these files and place them in:  
 `/data/imdb/`
 
-They are not stored in this repository due to size constraints, but the cleaning notebook (`Cleaning.ipynb`) will automatically detect and merge them if present.
-
-These files are not included in this repository due to their large size but are freely available from IMDb. The cleaning notebook (`Cleaning.ipynb`) will automatically detect and merge them if present in that folder.
+They are not stored in this repository due to size constraints, but the cleaning notebook (`Cleaning.ipynb`) will automatically detect and merge them if present.  
+If IMDb files are missing, the enrichment step is skipped automatically.
 
 Cleaned combined dataset:  
 `data/clean_streaming_metadata.csv`
+
+A cached enriched dataset is also created to avoid recomputing heavy joins:  
+`data/merged_streaming_imdb.pkl`
 
 #### Data Limitations
 
@@ -60,37 +63,14 @@ All preprocessing, imputation, and transformation steps are documented in the `C
 
 ---
 
-## Project Workflow  
-
-1. **Data Cleaning & Integration**  
-   - Combined Netflix, Disney+, and Amazon Prime datasets.  
-   - Removed duplicates, standardized column names, and harmonized data formats.  
-   - Excluded unreliable `country` field and created inferred language/genre-based region indicators.  
-
-2. **Exploratory Data Analysis (EDA)**  
-   - Visualized content distributions by platform, genre, and year.  
-   - Analyzed IMDb rating distributions and missingness patterns.  
-
-3. **Modeling (Classification)**  
-   - Predicted popularity using logistic regression, random forest, and XGBoost classifiers.  
-   - Evaluated with accuracy, precision, recall, and F1-score.  
-
-4. **Unsupervised Clustering**  
-   - Applied K-Means and Hierarchical Clustering to detect cultural content groupings.  
-   - Validated with Silhouette and Davies–Bouldin scores.  
-
-5. **Interpretation & Reporting**  
-   - Compared representation and performance across platforms.  
-   - Interpreted results through a cultural globalization and soft-power lens.  
-
----
-
 ## Reproducibility  
 
 - All preprocessing, merging, and modeling scripts are included in the repository (`Cleaning.ipynb`, `EDA.ipynb`, and `Modeling.ipynb`).  
-- The complete workflow is version-controlled through GitHub and documented through comments and this README.  
+- The IMDb enrichment step writes a cached dataset to:  
+  `data/merged_streaming_imdb.pkl`  
+  If it exists, the merge step is skipped automatically.  
 - Visual outputs and results are reproducible from the cleaned dataset.
-- If the IMDb files are not found in `/data/imdb/`, the enrichment step will be skipped automatically, and the dataset will load without ratings or country backfill.
+- If the IMDb files are not found in `/data/imdb/`, enrichment is skipped and the dataset will load without ratings or backfill.
 
 ---
 
@@ -105,7 +85,7 @@ All figures and results shown in `Puvaneswaran_Kabilan_Initial_Results.pdf` were
    - `title.basics.tsv.gz`  
    - `title.ratings.tsv.gz`  
    - `title.akas.tsv.gz`
-3. Place all downloaded files in the `/data/` and `/data/imdb/` directories as shown above 
+3. Place all downloaded files in the `/data/` and `/data/imdb/` directories as shown above.  
 4. Run `Cleaning.ipynb`, then `EDA.ipynb`.
 
 If the IMDb files are not found, the enrichment step will be skipped automatically and the dataset will still load with the base Kaggle metadata.
@@ -113,7 +93,7 @@ If the IMDb files are not found, the enrichment step will be skipped automatical
 Deliverables:
 - `Puvaneswaran_Kabilan_InitialResults.pdf`  
 - `data/clean_streaming_metadata.csv`  
-- `/figures/` directory (Figures output)
+- `/figures/` directory (Figures output)  
 - `/outputs/` directory (model statistics output)  
 - `Cleaning.ipynb` and `EDA.ipynb` notebooks  
--  Video [Drive link](https://drive.google.com/file/d/1JFGQQiPWGFKUjnKZk7phe1dpu7mQ9xvV/view?usp=sharing)
+- Video [Drive link](https://drive.google.com/file/d/1JFGQQiPWGFKUjnKZk7phe1dpu7mQ9xvV/view?usp=sharing)
